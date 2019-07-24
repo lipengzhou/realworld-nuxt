@@ -29,6 +29,13 @@
               <button class="btn btn-lg btn-primary pull-xs-right">Update Settings</button>
             </fieldset>
           </form>
+
+          <!-- Line break for logout button -->
+          <hr>
+          <button
+            class="btn btn-outline-danger"
+            @click="handleLogout"
+          >Or click here to logout.</button>
         </div>
       </div>
     </div>
@@ -36,8 +43,18 @@
 </template>
 
 <script>
+const Cookie = process.client ? require('js-cookie') : undefined
+
 export default {
-  name: 'SettingsIndex'
+  name: 'SettingsIndex',
+  methods: {
+    handleLogout () {
+      // 使外部API上的JWT Cookie无效
+      Cookie.remove('auth')
+      this.$store.commit('setAuth', null)
+      this.$router.push('/')
+    }
+  }
 }
 </script>
 

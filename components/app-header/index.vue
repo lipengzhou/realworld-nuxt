@@ -7,19 +7,26 @@
           <!-- Add "active" class when you're on that page" -->
           <nuxt-link class="nav-link" to="/" exact>Home</nuxt-link>
         </li>
-        <li class="nav-item">
-          <nuxt-link class="nav-link" to="/editor">
-            <i class="ion-compose"></i>&nbsp;New Post
-          </nuxt-link>
-        </li>
-        <li class="nav-item">
-          <nuxt-link class="nav-link" to="/settings">
-            <i class="ion-gear-a"></i>&nbsp;Settings
-          </nuxt-link>
-        </li>
-        <li class="nav-item">
-          <nuxt-link class="nav-link" to="/login">Sign up</nuxt-link>
-        </li>
+        <template v-if="$store.state.auth">
+          <li class="nav-item">
+            <nuxt-link class="nav-link" to="/editor">
+              <i class="ion-compose"></i>&nbsp;New Post
+            </nuxt-link>
+          </li>
+          <li class="nav-item">
+            <nuxt-link class="nav-link" to="/settings">
+              <i class="ion-gear-a"></i>&nbsp;Settings
+            </nuxt-link>
+          </li>
+        </template>
+        <template v-else>
+          <li class="nav-item">
+            <nuxt-link class="nav-link" to="/login">Sign in</nuxt-link>
+          </li>
+          <li class="nav-item">
+            <nuxt-link class="nav-link" to="/register">Sign up</nuxt-link>
+          </li>
+        </template>
       </ul>
     </div>
   </nav>
