@@ -1,7 +1,5 @@
+import router from './router'
+
 export default {
-  router: {
-    linkActiveClass: 'active',
-    extendRoutes (routes, resolve) {
-    }
-  }
+  router
 }

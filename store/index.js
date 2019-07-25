@@ -14,7 +14,6 @@ const createStore = () => {
     },
     actions: {
       nuxtServerInit({ commit }, { req }) {
-        console.log('hello')
         let auth = null
         if (req.headers.cookie) {
           const parsed = cookieparser.parse(req.headers.cookie)
