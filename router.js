@@ -1,7 +1,10 @@
 export default {
   linkActiveClass: 'active',
   extendRoutes (routes, resolve) {
+    // 删除 Nuxt 自动生成的路由表
     routes.splice(0)
+
+    // 自定义配置路由表
     routes.push(...[
       {
         name: 'home',
@@ -24,7 +27,7 @@ export default {
         component: resolve(__dirname, 'views/editor')
       },
       {
-        name: 'editor',
+        name: 'editor-edit',
         path: '/editor/:slug',
         component: resolve(__dirname, 'views/editor')
       },

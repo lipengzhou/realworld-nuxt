@@ -1,8 +1,8 @@
 import request from '@/utils/request'
 
-export const getArticles = () => {
+export const getTags = () => {
   return request({
     method: 'GET',
-    url: '/api/articles'
+    url: '/api/tags'
   })
 }
