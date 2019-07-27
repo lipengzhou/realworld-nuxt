@@ -75,3 +75,23 @@ export const deleteArticle = slug => {
     url: `/api/articles/${slug}`
   })
 }
+
+/**
+ * Favorite Article
+ */
+export const favoriteArticle = slug => {
+  return request({
+    method: 'POST',
+    url: `/api/articles/${slug}/favorite`
+  })
+}
+
+/**
+ * Unfavorite Article
+ */
+export const unfavoriteArticle = slug => {
+  return request({
+    method: 'DELETE',
+    url: `/api/articles/${slug}/favorite`
+  })
+}

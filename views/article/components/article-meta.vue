@@ -37,10 +37,22 @@
         <!-- <span class="counter">(10)</span> -->
       </button>
       &nbsp;&nbsp;
-      <button class="btn btn-sm btn-outline-primary">
+      <!-- 
+        已喜欢 btn-primary
+        未喜欢 btn-outline-primary
+       -->
+      <button
+        class="btn btn-sm"
+        :class="{
+          'btn-primary': article.favorited,
+          'btn-outline-primary': !article.favorited
+        }"
+        :disabled="favoriteLoding"
+        @click="onFavorite"
+      >
         <i class="ion-heart"></i>
         &nbsp;
-        Favorite Post
+        {{ article.favorited ? 'UnFavorite' : 'Favorite' }} Post
         <span class="counter">({{ article.favoritesCount }})</span>
       </button>
     </template>
@@ -49,6 +61,7 @@
 
 <script>
 import { followUser, unFollowUser } from '@/api/profile'
+import { favoriteArticle, unfavoriteArticle } from '@/api/article'
 
 export default {
   name: 'ArticleMeta',
@@ -61,7 +74,8 @@ export default {
 
   data () {
     return {
-      followLoding: false
+      followLoding: false,
+      favoriteLoding: false
     }
   },
 
@@ -75,7 +89,7 @@ export default {
     async onFollow () {
       try {
         this.followLoding = true
-        
+
         const { following, username } = this.article.author
       
         let res = null
@@ -91,7 +105,28 @@ export default {
       }
 
       this.followLoding = false
-    }
+    },
+
+    async onFavorite () {
+      try {
+        this.favoriteLoding = true
+
+        const { favorited, slug } = this.article
+      
+        let res = null
+        if (favorited) {
+          res = await unfavoriteArticle(slug)
+        } else {
+          res = await favoriteArticle(slug)
+        }
+
+        this.article.favorited = res.data.article.favorited
+      } catch (err) {
+        console.log(err)
+      }
+
+      this.favoriteLoding = false
+    },
   }
 }
 </script>
