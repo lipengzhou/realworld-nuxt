@@ -96,14 +96,18 @@ export default {
     
     async onPublish () {
       try {
-        const { data } = await this.isEdit
-          ? updateArticle()
-          : createArticle(this.article)
+        let res = null
         
+        if (this.isEdit) {
+          res = await updateArticle()
+        } else {
+          res = await createArticle(this.article)
+        }
+
         this.$router.push({
           name: 'article',
           params: {
-            slug: data.article.slug
+            slug: res.data.article.slug
           }
         })
       } catch (err) {
