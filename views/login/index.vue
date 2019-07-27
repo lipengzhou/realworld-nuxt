@@ -12,7 +12,7 @@
             <li>That email is already taken</li>
           </ul>
 
-          <form @submit.prevent="handleLogin">
+          <form @submit.prevent="onLogin">
             <fieldset class="form-group">
               <input
                 v-model="user.email"
@@ -48,12 +48,11 @@ export default {
     }
   },
   methods: {
-    async handleLogin () {
+    async onLogin () {
       try {
         const { data } = await login(this.user)
         this.$store.commit('setAuth', data.user) // 存储在vuex中用来进行客户端渲染
         Cookie.set('auth', data.user) // 在cookie中保存token用来进行服务器端渲染
-        console.log('登录成功')
         this.$router.push('/')
       } catch (err) {
         console.log('登录失败')

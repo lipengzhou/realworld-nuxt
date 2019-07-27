@@ -1,19 +1,19 @@
 import request from '@/utils/request'
 
 /**
- * List Articles
+ * Get Comments from an Article
  */
-export const getArticles = () => {
+export const getComments = slug => {
   return request({
     method: 'GET',
-    url: '/api/articles'
+    url: `/api/articles/${slug}/comments`
   })
 }
 
 /**
  * Get Article
  */
-export const getArticle = slug => {
+export const getArticles = slug => {
   return request({
     method: 'GET',
     url: `/api/articles/${slug}`
@@ -49,7 +49,7 @@ export const createArticle = ({
  * Update Article
  * Tip: The slug also gets updated when the title is changed
  */
-export const updateArticle = (slug, {
+export const getArticles = (slug, {
   title,
   description,
   body
@@ -69,7 +69,7 @@ export const updateArticle = (slug, {
  * Delete Article
  * Tip: The slug also gets updated when the title is changed
  */
-export const deleteArticle = slug => {
+export const getArticles = slug => {
   return request({
     method: 'DELETE',
     url: `/api/articles/${slug}`
