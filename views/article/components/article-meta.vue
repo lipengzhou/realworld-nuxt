@@ -7,7 +7,9 @@
       <a href class="author">{{ article.author.username }}</a>
       <span class="date">{{ article.createdAt | relativeTime }}</span>
     </div>
-    <template v-if="article.author.username === $store.state.auth.username">
+    <template
+      v-if="$store.state.auth && (article.author.username === $store.state.auth.username)"
+    >
       <span>
         <a class="btn btn-outline-secondary btn-sm" href="#">
           <i class="ion-edit"></i> Edit Article
@@ -29,7 +31,7 @@
           'btn-outline-secondary': !isFollowing
         }"
         :disabled="followLoding"
-        @click="onFollow"
+        @click="$authenticated() && onFollow()"
       >
         <i class="ion-plus-round"></i>
         &nbsp;
@@ -48,7 +50,7 @@
           'btn-outline-primary': !article.favorited
         }"
         :disabled="favoriteLoding"
-        @click="onFavorite"
+        @click="$authenticated() && onFavorite()"
       >
         <i class="ion-heart"></i>
         &nbsp;

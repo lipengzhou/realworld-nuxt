@@ -1,10 +1,10 @@
 import request from '@/utils/request'
 
-export default (context, inject) => {
+export default ({ store }) => {
   // Add a request interceptor
   request.interceptors.request.use(config => {
     // Do something before request is sent
-    const { auth } = context.store.state
+    const { auth } = store.state
     if (auth) {
       config.headers['Authorization'] = `Token ${auth.token}`
     }
