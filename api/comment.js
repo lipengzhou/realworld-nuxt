@@ -3,14 +3,12 @@ import request from '@/utils/request'
 /**
  * Add Comments to an Article
  */
-export const createComment = (slug, body) => {
+export const createComment = (slug, comment) => {
   return request({
     method: 'POST',
     url: `/api/articles/${slug}/comments`,
     data: {
-      comment: {
-        body
-      }
+      comment
     }
   })
 }
