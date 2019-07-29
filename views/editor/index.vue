@@ -39,10 +39,10 @@
                 <div class="tag-list">
                   <span
                     class="tag-default tag-pill"
-                    v-for="item in article.tagList"
+                    v-for="(item, index) in article.tagList"
                     :key="item"
                   >
-                    <i class="ion-close-round"></i>
+                    <i class="ion-close-round" @click="article.tagList.splice(index, 1)"></i>
                     {{ item }}
                   </span>
                 </div>
@@ -61,11 +61,14 @@
 </template>
 
 <script>
-import { createArticle, updateArticle } from '@/api/article'
+import {
+  createArticle,
+  updateArticle,
+  getArticle
+} from '@/api/article'
 
 export default {
   name: 'EditorIndex',
-  
   data () {
     return {
       article: {
@@ -77,7 +80,7 @@ export default {
     }
   },
 
-  created () {
+  mounted () {
     if (this.isEdit) {
       this.loadArticle()
     }
@@ -90,8 +93,9 @@ export default {
   },
 
   methods: {
-    loadArticle () {
-      console.log('loadArticle')
+    async loadArticle () {
+      const { data } = await getArticle(this.$route.params.slug)
+      this.article = data.article
     },
     
     async onPublish () {
@@ -99,7 +103,12 @@ export default {
         let res = null
         
         if (this.isEdit) {
-          res = await updateArticle()
+          const { title, description, body } = this.article
+          res = await updateArticle(this.article.slug, {
+            title,
+            description,
+            body
+          })
         } else {
           res = await createArticle(this.article)
         }

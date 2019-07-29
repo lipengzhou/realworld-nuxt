@@ -26,7 +26,7 @@
     </p>
     <div
       class="card"
-      v-for="comment in comments"
+      v-for="(comment, commentIndex) in comments"
       :key="comment.id"
     >
       <div class="card-block">
@@ -39,6 +39,13 @@
         &nbsp;
         <a href class="comment-author">{{ comment.author.username }}</a>
         <span class="date-posted">{{ comment.createdAt | relativeTime }}</span>
+        <span
+          v-if="$store.state.auth && (comment.author.username === $store.state.auth.username)"
+          class="mod-options"
+          @click="onDeleteComment(comment.id, commentIndex)"
+        >
+          <i class="ion-trash-a"></i>
+        </span>
       </div>
     </div>
   </div>
@@ -79,6 +86,11 @@ export default {
       const { data } = await createComment(this.slug, this.comment)
       this.comments.unshift(data.comment)
       this.comment.body = ''
+    },
+
+    async onDeleteComment (commentId, commentIndex) {
+      const { data } = await deleteComments(this.slug, commentId)
+      this.comments.splice(commentIndex, 1)
     }
   }
 }

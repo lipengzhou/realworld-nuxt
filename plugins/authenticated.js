@@ -8,4 +8,8 @@ export default function ({ store, redirect }) {
     }
     return true
   }
+
+  // Vue.directive('authenticated', (el) => {
+  //   el.style.display = store.state.auth ? 'block' : 'none'
+  // })
 }

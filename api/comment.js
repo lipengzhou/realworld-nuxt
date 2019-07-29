@@ -26,9 +26,9 @@ export const getComments = slug => {
 /**
  * Delete Comment
  */
-export const deleteComments = slug => {
+export const deleteComments = (slug, commentId) => {
   return request({
     method: 'DELETE',
-    url: `/api/articles/${slug}/comments/:id`
+    url: `/api/articles/${slug}/comments/${commentId}`
   })
 }

@@ -11,9 +11,12 @@
       v-if="$store.state.auth && (article.author.username === $store.state.auth.username)"
     >
       <span>
-        <a class="btn btn-outline-secondary btn-sm" href="#">
+        <nuxt-link
+          class="btn btn-outline-secondary btn-sm"
+          :to="`/editor/${article.slug}`"
+        >
           <i class="ion-edit"></i> Edit Article
-        </a>
+        </nuxt-link>
         <button class="btn btn-outline-danger btn-sm">
           <i class="ion-trash-a"></i> Delete Article
         </button>
