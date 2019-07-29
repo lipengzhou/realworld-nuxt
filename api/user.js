@@ -64,11 +64,13 @@ export const updateUser = ({
     method: 'PUT',
     url: '/api/user',
     data: {
-      email,
-      username,
-      password,
-      image,
-      bio
+      user: {
+        email,
+        username,
+        password,
+        image,
+        bio
+      }
     }
   })
 }

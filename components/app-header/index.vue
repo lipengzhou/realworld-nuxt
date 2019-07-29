@@ -21,7 +21,7 @@
           <li class="nav-item">
             <nuxt-link class="nav-link" :to="{ name: 'profile', params: { username: auth.username } }">
               <img class="user-pic" :src="auth.image">
-              lpz
+              {{ auth.username }}
             </nuxt-link>
           </li>
         </template>
