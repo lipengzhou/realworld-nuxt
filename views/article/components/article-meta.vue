@@ -17,7 +17,7 @@
         >
           <i class="ion-edit"></i> Edit Article
         </nuxt-link>
-        <button class="btn btn-outline-danger btn-sm">
+        <button class="btn btn-outline-danger btn-sm" @click="onDeleteArticle">
           <i class="ion-trash-a"></i> Delete Article
         </button>
       </span>
@@ -66,7 +66,11 @@
 
 <script>
 import { followUser, unFollowUser } from '@/api/profile'
-import { favoriteArticle, unfavoriteArticle } from '@/api/article'
+import {
+  favoriteArticle,
+  unfavoriteArticle,
+  deleteArticle
+} from '@/api/article'
 
 export default {
   name: 'ArticleMeta',
@@ -132,6 +136,11 @@ export default {
 
       this.favoriteLoding = false
     },
+
+    async onDeleteArticle () {
+      await deleteArticle(this.article.slug)
+      this.$router.push('/')
+    }
   }
 }
 </script>

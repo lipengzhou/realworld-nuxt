@@ -3,7 +3,7 @@ import request from '@/utils/request'
 /**
  * Get Profile
  */
-export const getProfile = () => {
+export const getProfile = username => {
   return request({
     method: 'GET',
     url: `/api/profiles/${username}`

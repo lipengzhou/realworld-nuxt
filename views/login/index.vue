@@ -34,7 +34,7 @@
 
 <script>
 const Cookie = process.client ? require('js-cookie') : undefined
-import { login } from '@/api/auth'
+import { login } from '@/api/user'
 
 export default {
   middleware: 'notAuthenticated',

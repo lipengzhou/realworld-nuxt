@@ -101,16 +101,18 @@ export default {
     async onPublish () {
       try {
         let res = null
+
+        const tagList = this.article.tagList.slice(0).reverse()
+
+        const article = {
+          ...this.article,
+          tagList
+        }
         
         if (this.isEdit) {
-          const { title, description, body } = this.article
-          res = await updateArticle(this.article.slug, {
-            title,
-            description,
-            body
-          })
+          res = await updateArticle(this.article.slug, article)
         } else {
-          res = await createArticle(this.article)
+          res = await createArticle(article)
         }
 
         this.$router.push({

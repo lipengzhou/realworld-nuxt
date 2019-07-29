@@ -19,7 +19,7 @@ export default {
       {
         name: 'register',
         path: '/register',
-        component: resolve(__dirname, 'views/login')
+        component: resolve(__dirname, 'views/register')
       },
       {
         name: 'editor',
