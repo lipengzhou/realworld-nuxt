@@ -3,10 +3,23 @@ import request from '@/utils/request'
 /**
  * List Articles
  */
-export const getArticles = () => {
+export const getArticles = ({
+  tag = null,
+  author = null,
+  favorited = null,
+  pageSize = 10,
+  page = 1
+} = {}) => {
   return request({
     method: 'GET',
-    url: '/api/articles'
+    url: '/api/articles',
+    params: {
+      tag,
+      author,
+      favorited,
+      limit: pageSize,
+      offset: (page - 1) * pageSize
+    }
   })
 }
 

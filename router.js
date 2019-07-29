@@ -32,9 +32,20 @@ export default {
         component: resolve(__dirname, 'views/editor')
       },
       {
-        name: 'profile',
         path: '/profile/:username',
-        component: resolve(__dirname, 'views/profile')
+        component: resolve(__dirname, 'views/profile'),
+        children: [
+          {
+            name: 'profile',
+            path: '',
+            component: resolve(__dirname, 'views/profile/components/my-articles')
+          },
+          {
+            name: 'profile-favorited',
+            path: 'favorited',
+            component: resolve(__dirname, 'views/profile/components/favorited-articles')
+          }
+        ]
       },
       {
         name: 'settings',
