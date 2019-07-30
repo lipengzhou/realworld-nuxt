@@ -66,6 +66,7 @@ export default {
   },
 
   async asyncData ({ params }) {
+    console.log('asyncData')
     const { data } = await getProfile(params.username)
     return {
       profile: data.profile

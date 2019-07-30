@@ -24,6 +24,23 @@ export const getArticles = ({
 }
 
 /**
+ * Feed Articles
+ */
+export const getMyFeedArticles = ({
+  pageSize = 10,
+  page = 1
+} = {}) => {
+  return request({
+    method: 'GET',
+    url: '/api/articles/feed',
+    params: {
+      limit: pageSize,
+      offset: (page - 1) * pageSize
+    }
+  })
+}
+
+/**
  * Get Article
  */
 export const getArticle = slug => {

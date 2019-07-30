@@ -67,27 +67,21 @@
 </template>
 
 <script>
-import { getCurrentUser, updateUser } from '@/api/user'
+import { updateUser } from '@/api/user'
 const Cookie = process.client ? require('js-cookie') : undefined
 
 export default {
   name: 'SettingsIndex',
+  middware: ['authenticated'],
   data () {
     return {
-      user: {}
+      user: {
+        ...this.$store.state.auth
+      }
     }
   },
 
-  mounted () {
-    this.loadUser()
-  },
-
   methods: {
-    async loadUser () {
-      const { data } = await getCurrentUser()
-      this.user = data.user
-    },
-
     handleLogout () {
       // 使外部API上的JWT Cookie无效
       Cookie.remove('auth')
